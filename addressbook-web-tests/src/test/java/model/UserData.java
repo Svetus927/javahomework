@@ -1,8 +1,10 @@
+package model;
+
 /**
  * Created by uasso on 07/07/2017.
  */
 public class UserData {
-    String firstname;
+    private final String firstname;
     String lastname;
     String address;
     String homephone;

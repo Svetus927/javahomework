@@ -5,8 +5,6 @@ apply plugin: 'java'
 
 apply plugin: 'application'
 
-mainClassName = "myFirstTest"
-
 
 
 sourceCompatibility = 1.8
