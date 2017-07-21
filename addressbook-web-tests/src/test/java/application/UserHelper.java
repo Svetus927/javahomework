@@ -2,15 +2,16 @@ package application;
 
 import model.UserData;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 /**
  * Created by uasso on 10/07/2017.
  */
 public class UserHelper extends HelperBase {
-    private FirefoxDriver wd;
+  //  private WebDriver wd;
 
-    public UserHelper(FirefoxDriver wd) {
+    public UserHelper(WebDriver wd) {
         super(wd);
     }
 
