@@ -35,8 +35,8 @@ public class GroupHelper extends HelperBase {
     }
 
 
-    public void initGroupModification() {
-        click(By.cssSelector("input[name='selected[]"));
+    public void initSelectedGroupModification() {
+
         click(By.name("edit"));
 
     }
@@ -46,9 +46,7 @@ public class GroupHelper extends HelperBase {
     }
 
     public void initSelectedGroupDeletion() {
-
         click(By.name("delete"));
-
     }
 
     public void createGroup(GroupData groupData) {
@@ -72,15 +70,27 @@ public class GroupHelper extends HelperBase {
 
         List<WebElement> elements =  wd.findElements(By.cssSelector("input[name='selected[]'"));
         for (WebElement element: elements) {
-            String name = element.getText();
-            GroupData group = new GroupData(name, null, null);
+            int  id = Integer.parseInt(element.getAttribute("value"));
+            String title = element.getAttribute("title");
+            String name = getGroupNameFromTitle(title);
+            GroupData group = new GroupData(id, name, null, null);
             groups.add(group);
         }
         return groups;
+    }
+
+    private String getGroupNameFromTitle(String title) {
+        int len = title.length();
+        String nam =title.substring(8,len-1 );
+        return nam;
+
     }
 
     public void selectGroup(int i) {
         wd.findElements(By.cssSelector("input[name='selected[]")).get(i).click();
 
     }
+
+
+
 }

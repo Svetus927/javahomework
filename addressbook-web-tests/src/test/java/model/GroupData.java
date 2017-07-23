@@ -2,17 +2,28 @@ package model;
 
 public class GroupData {
 
+    public int getGroupId() {
+        return groupId;
+    }
 
+    private  int groupId;
     private final String groupName;
     private final String groupHeader;
     private final String groupFooter;
 
     public GroupData(String groupName,String groupHeader, String groupFooter) {
+        this.groupId= 0;
         this.groupName = groupName;
         this.groupHeader= groupHeader;
         this.groupFooter = groupFooter;
     }
 
+    public GroupData(int groupId, String groupName,String groupHeader, String groupFooter) {
+        this.groupId= groupId;
+        this.groupName = groupName;
+        this.groupHeader= groupHeader;
+        this.groupFooter = groupFooter;
+    }
     public String getGroupName() {
         return groupName;
     }
@@ -25,10 +36,15 @@ public class GroupData {
         return groupHeader;
     }
 
+    public void setGroupId(int groupId) {
+        this.groupId = groupId;
+    }
+
     @Override
     public String toString() {
         return "GroupData{" +
-                "groupName='" + groupName + '\'' +
+                "groupId=" + groupId +
+                ", groupName='" + groupName + '\'' +
                 '}';
     }
 
@@ -39,11 +55,14 @@ public class GroupData {
 
         GroupData groupData = (GroupData) o;
 
+        if (groupId != groupData.groupId) return false;
         return groupName != null ? groupName.equals(groupData.groupName) : groupData.groupName == null;
     }
 
     @Override
     public int hashCode() {
-        return groupName != null ? groupName.hashCode() : 0;
+        int result = groupId;
+        result = 31 * result + (groupName != null ? groupName.hashCode() : 0);
+        return result;
     }
 }

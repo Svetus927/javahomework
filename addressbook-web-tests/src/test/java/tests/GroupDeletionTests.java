@@ -32,10 +32,10 @@ public class GroupDeletionTests extends TestBase {
         if ( after.size()> 0 ) {
             before.remove(after.size() - 1);
             System.out.println("before.equals(after) " + before.equals(after));
-            Assert.assertEquals(after, before, "Lists of groups before and after deletion are not equal!");
-            /*  for (int i = 0; i < after.size(); i++) {
+            Assert.assertEquals(after, before, /*  for (int i = 0; i < after.size(); i++) {
                 Assert.assertEquals(before.get(i), after.get(i));
-            } */
+            } */"Lists of groups before and after deletion are not equal!");
+
         }
 
 
