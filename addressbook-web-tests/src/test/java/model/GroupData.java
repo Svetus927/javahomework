@@ -3,49 +3,36 @@ package model;
 public class GroupData {
 
     public int getGroupId() {
-        return groupId;
+        return id;
     }
 
-    private  int groupId;
-    private final String groupName;
-    private final String groupHeader;
-    private final String groupFooter;
+    private  int id = Integer.MAX_VALUE;
+    private  String name;
+    private  String header;
+    private  String footer;
 
-    public GroupData(String groupName,String groupHeader, String groupFooter) {
-        this.groupId= 0;
-        this.groupName = groupName;
-        this.groupHeader= groupHeader;
-        this.groupFooter = groupFooter;
+
+    public String name() {
+        return name;
     }
 
-    public GroupData(int groupId, String groupName,String groupHeader, String groupFooter) {
-        this.groupId= groupId;
-        this.groupName = groupName;
-        this.groupHeader= groupHeader;
-        this.groupFooter = groupFooter;
-    }
-    public String getGroupName() {
-        return groupName;
+    public String footer() {
+        return footer;
     }
 
-    public String getGroupFooter() {
-        return groupFooter;
+    public String header() {
+        return header;
     }
 
-    public String getGroupHeader() {
-        return groupHeader;
+
+    public GroupData withId(int id) {
+        this.id = id;
+        return this;
     }
 
-    public void setGroupId(int groupId) {
-        this.groupId = groupId;
-    }
-
-    @Override
-    public String toString() {
-        return "GroupData{" +
-                "groupId=" + groupId +
-                ", groupName='" + groupName + '\'' +
-                '}';
+    public GroupData withName(String name) {
+        this.name = name;
+        return this;
     }
 
     @Override
@@ -55,14 +42,33 @@ public class GroupData {
 
         GroupData groupData = (GroupData) o;
 
-        if (groupId != groupData.groupId) return false;
-        return groupName != null ? groupName.equals(groupData.groupName) : groupData.groupName == null;
+        if (id != groupData.id) return false;
+        return name != null ? name.equals(groupData.name) : groupData.name == null;
     }
 
     @Override
     public int hashCode() {
-        int result = groupId;
-        result = 31 * result + (groupName != null ? groupName.hashCode() : 0);
+        int result = id;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
         return result;
     }
+
+    public GroupData withHeader(String header) {
+        this.header = header;
+        return this;
+
+    }
+
+    public GroupData withFooter(String footer) {
+        this.footer = footer;
+        return this;
+    }
+    @Override
+    public String toString() {
+        return "GroupData{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
 }

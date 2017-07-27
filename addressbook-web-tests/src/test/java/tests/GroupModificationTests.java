@@ -1,46 +1,54 @@
 package tests;
 
+
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import model.GroupData;
 
 import java.util.HashSet;
-import java.util.List;
+
+import static org.hamcrest.CoreMatchers.equalTo;
 
 /**
  * Created by Svetlana Verkholantceva on 13/07/2017.
  */
 public class GroupModificationTests  extends TestBase{
-    @Test
-    public void testGroupModification() {
+    @BeforeMethod
+    public void ensurePreconditions() {
         app.gotoGroupPage();
-        if (!app.getGroupHelper().isThereAGroup()) {
-            app.getGroupHelper().createGroup(new GroupData("Friends", null, "friends"));
+        if (!app.groupHelper().isThereAGroup()) {
+            app.groupHelper().create(new GroupData().withName("Friends").withFooter("friends"));
             app.gotoGroupPage();
         }
+    }
 
-        List<GroupData> before = app.getGroupHelper().getGroupList();
+    @Test
+    public void testGroupModification() {
 
-        System.out.println("before = " + before.size());
-        int selectedNum  = before.size() - 1;
-        app.getGroupHelper().selectGroup(selectedNum);
-        app.getGroupHelper().initSelectedGroupModification();
-        GroupData groupUpdated = new GroupData(before.get(selectedNum).getGroupId(),"First Group", null, "friendsUpd");
-        app.getGroupHelper().fillGroupData(groupUpdated);
-        app.getGroupHelper().submitGroupModification();
+        HashSet<GroupData> before = app.groupHelper().all();
+
+        GroupData groupToModify = before.iterator().next(); // выбирается случайный эл т множества и затем у него next
+        GroupData newGroupData = new GroupData().withId(groupToModify.getGroupId()).withName("Friends1").withFooter("friendsUpd");
+
+        app.groupHelper().selectGroupbyId(groupToModify.getGroupId());
+        app.groupHelper().edit();
+        app.groupHelper().fillGroupData(newGroupData);
+        app.groupHelper().submitModification();
 
         app.gotoGroupPage();
-
-        List<GroupData> after = app.getGroupHelper().getGroupList();
-        System.out.println("after = " + after.size());
+        HashSet<GroupData> after = app.groupHelper().all();
 
         // Сравниваем размеры списков:
         Assert.assertEquals(after.size(), before.size() );
 
         // сравниваем сами списки, предварительно удалив старый элемент и добавив новый и преобразовав их в множества HashSet:
-        before.remove(selectedNum);
-        before.add(groupUpdated);
-        Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
+        before.remove(groupToModify);
+        before.add(newGroupData);
+        MatcherAssert.assertThat(after, CoreMatchers.equalTo(before));
+       // Assert.assertEquals(before,after);   простой testng-шный способ без хамкреста для примера
 
 
     }

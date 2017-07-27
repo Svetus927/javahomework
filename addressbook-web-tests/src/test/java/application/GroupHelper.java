@@ -1,13 +1,16 @@
 package application;
 
+
 import model.GroupData;
+import model.Groups;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+
 
 /**
  * Created by uasso on 10/07/2017.
@@ -18,11 +21,12 @@ public class GroupHelper extends HelperBase {
         super(wd);
     }
 
+
     public void fillGroupData(GroupData groupData) {
 
-        type(By.name("group_name"), groupData.getGroupName());
-        type(By.name("group_header"), groupData.getGroupHeader());
-        type(By.name("group_footer"), groupData.getGroupFooter());
+        type(By.name("group_name"), groupData.name());
+        type(By.name("group_header"), groupData.header());
+        type(By.name("group_footer"), groupData.footer());
 
     }
 
@@ -35,62 +39,103 @@ public class GroupHelper extends HelperBase {
     }
 
 
-    public void initSelectedGroupModification() {
+    public void edit() {
 
         click(By.name("edit"));
 
     }
 
-    public void submitGroupModification() {
+    public void submitModification() {
         click(By.name("update"));
+        groupCache = null;
     }
 
-    public void initSelectedGroupDeletion() {
+    public void delete(GroupData groupToDelete) {
+        selectGroupbyId(groupToDelete.getGroupId());
+        deleteSelectedGroup();
+
+    }
+
+    public void deleteSelectedGroup() {
         click(By.name("delete"));
+        groupCache = null;
     }
 
-    public void createGroup(GroupData groupData) {
+    public void create(GroupData groupData) {
         initGroupCreation();
         fillGroupData(groupData);
         submitGroupCreation();
+        groupCache = null;
     }
 
     public boolean isThereAGroup() {
         return isElementPresent(By.cssSelector("input[name='selected[]"));
     }
 
-    public int getGroupCount() {
+    public int count() {
         return wd.findElements(By.cssSelector("input[name='selected[]'")).size();
     }
 
-    public List<GroupData> getGroupList() {
+    public List<GroupData> getList() {
         // просто так List of WebElements в List<GroupData> не запихать, поэтому надо пооследовательно пройти по списку и создавать
         // объекты нужного типа, а потом их уже добавить в нужный список
         List groups = new ArrayList<GroupData>();
 
-        List<WebElement> elements =  wd.findElements(By.cssSelector("input[name='selected[]'"));
-        for (WebElement element: elements) {
-            int  id = Integer.parseInt(element.getAttribute("value"));
+        List<WebElement> elements = wd.findElements(By.cssSelector("input[name='selected[]'"));
+        for (WebElement element : elements) {
+            int id = Integer.parseInt(element.getAttribute("value"));
             String title = element.getAttribute("title");
             String name = getGroupNameFromTitle(title);
-            GroupData group = new GroupData(id, name, null, null);
+            GroupData group = new GroupData().withId(id).withName(name).withHeader(null).withFooter(null);
             groups.add(group);
         }
         return groups;
     }
 
+    private Groups groupCache = null; // для ускорения работы
+
+    public HashSet<GroupData> all() {
+
+        HashSet groups = new HashSet<GroupData>();
+
+        List<WebElement> elements = wd.findElements(By.cssSelector("input[name='selected[]'"));
+        for (WebElement element : elements) {
+            int id = Integer.parseInt(element.getAttribute("value"));
+            String name = getGroupNameFromTitle(element.getAttribute("title"));
+            GroupData group = new GroupData().withId(id).withName(name).withHeader(null).withFooter(null);
+            groups.add(group);
+        }
+        return groups;
+    }
+
+    public Groups allGroups() {
+// метод аналогичный all но возвращающий объект типа Groups еоторый мы создали сами для добавления собственных методов
+        if (groupCache != null) {
+            return new Groups(groupCache);
+        }
+
+        groupCache = new Groups();
+
+        List<WebElement> elements = wd.findElements(By.cssSelector("input[name='selected[]'"));
+        for (WebElement element : elements) {
+            int id = Integer.parseInt(element.getAttribute("value"));
+            String name = getGroupNameFromTitle(element.getAttribute("title"));
+            GroupData group = new GroupData().withId(id).withName(name).withHeader(null).withFooter(null);
+            groupCache.add(group);
+        }
+        return new Groups(groupCache);
+
+    }
+
     private String getGroupNameFromTitle(String title) {
         int len = title.length();
-        String nam =title.substring(8,len-1 );
+        String nam = title.substring(8, len - 1);
         return nam;
 
     }
 
-    public void selectGroup(int i) {
-        wd.findElements(By.cssSelector("input[name='selected[]")).get(i).click();
 
+    public void selectGroupbyId(int groupId) {
+        wd.findElement(By.cssSelector("input[value='" + groupId + "']")).click();
     }
-
-
-
 }
