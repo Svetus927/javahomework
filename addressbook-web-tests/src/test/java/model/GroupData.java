@@ -1,16 +1,36 @@
 package model;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import org.hibernate.annotations.Type;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@XStreamAlias("group")  // м. использоватьля для определения названий тегов при создании тестовых данных в формате xml
+@Entity // для маппинга объектов  при соединении с БД через Hibernate ( тест HBConnectionTests )
+@Table(name="group_list") // для Hibernate  привязка к нужной таблице, если бы имя класса и таблицы были одикановы, то не нужно
 public class GroupData {
 
-    public int getGroupId() {
-        return id;
-    }
-
+    @Id // для указания что это уник идр в базе
+    @Column(name="group_id") // @Column для привязки к столбцу в БД ( hibernate)
+    @XStreamOmitField // для того чтобы это поле не сохранялось в формате xml, т.к. это всегда макс инт
     private  int id = Integer.MAX_VALUE;
+
+    @Column(name="group_name") // @Column для привязки к столбцу в БД ( hibernate)
     private  String name;
+
+    @Column(name="group_header") // @Column для привязки к столбцу в БД ( hibernate)
+    @Type(type="text")
     private  String header;
+
+    @Column(name="group_footer") // @Column для привязки к столбцу в БД ( hibernate)
+    @Type(type="text")
     private  String footer;
 
+    public int id() {return id;}
 
     public String name() {
         return name;
@@ -34,6 +54,17 @@ public class GroupData {
         this.name = name;
         return this;
     }
+    public GroupData withHeader(String header) {
+        this.header = header;
+        return this;
+
+    }
+
+    public GroupData withFooter(String footer) {
+        this.footer = footer;
+        return this;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -53,16 +84,7 @@ public class GroupData {
         return result;
     }
 
-    public GroupData withHeader(String header) {
-        this.header = header;
-        return this;
 
-    }
-
-    public GroupData withFooter(String footer) {
-        this.footer = footer;
-        return this;
-    }
     @Override
     public String toString() {
         return "GroupData{" +

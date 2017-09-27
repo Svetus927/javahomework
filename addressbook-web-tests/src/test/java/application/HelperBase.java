@@ -6,6 +6,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+import java.io.File;
+
 /**
  * Created by uasso on 11/07/2017.
  */
@@ -17,11 +19,27 @@ public class HelperBase {
     }
 
     protected void type(By locator, String text) {
-        wd.findElement(locator).click();
-        wd.findElement(locator).clear();
-        wd.findElement(locator).sendKeys(text);
+       if (text!=null) {
+           WebElement field = wd.findElement(locator);
+           field.click(); // нужен для текстовых полей ввода, но "вреден" для файловых полей
+           String existingText = field.getAttribute("value"); // получаем текущее значение поля
+           if (!text.equals(existingText)) {
+               field.clear();
+               field.sendKeys(text);
+           }
+       }
     }
 
+    protected void attach(By locator, File file) {
+        WebElement field = wd.findElement(locator);
+
+
+        if (file !=null) {
+
+            field.sendKeys(file.getAbsolutePath());
+        }
+
+    }
     protected void click(By locator) {
         wd.findElement(locator).click();
     }

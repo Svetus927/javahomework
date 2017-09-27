@@ -20,25 +20,25 @@
 <tr>
 <td>
 <div class="infoBox" id="tests">
-<div class="counter">0</div>
+<div class="counter">13</div>
 <p>tests</p>
 </div>
 </td>
 <td>
 <div class="infoBox" id="failures">
-<div class="counter">0</div>
+<div class="counter">6</div>
 <p>failures</p>
 </div>
 </td>
 <td>
 <div class="infoBox" id="ignored">
-<div class="counter">0</div>
+<div class="counter">5</div>
 <p>ignored</p>
 </div>
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">-</div>
+<div class="counter">6.826s</div>
 <p>duration</p>
 </div>
 </td>
@@ -47,8 +47,8 @@
 </div>
 </td>
 <td>
-<div class="infoBox success" id="successRate">
-<div class="percent">-</div>
+<div class="infoBox failures" id="successRate">
+<div class="percent">25%</div>
 <p>successful</p>
 </div>
 </td>
@@ -58,10 +58,110 @@
 <div id="tabs">
 <ul class="tabLinks">
 <li>
-<a href="#tab0">Classes</a>
+<a href="#tab0">Failed tests</a>
+</li>
+<li>
+<a href="#tab1">Ignored tests</a>
+</li>
+<li>
+<a href="#tab2">Packages</a>
+</li>
+<li>
+<a href="#tab3">Classes</a>
 </li>
 </ul>
 <div id="tab0" class="tab">
+<h2>Failed tests</h2>
+<ul class="linkList">
+<li>
+<a href="classes/tests.GroupCreationTests.html">GroupCreationTests</a>.
+<a href="classes/tests.GroupCreationTests.html#tearDown">tearDown</a>
+</li>
+<li>
+<a href="classes/tests.GroupCreationTests.html">GroupCreationTests</a>.
+<a href="classes/tests.GroupCreationTests.html#tesGroupCreation[0](GroupData{id=0, name='test 0'})">tesGroupCreation[0](GroupData{id=0, name='test 0'})</a>
+</li>
+<li>
+<a href="classes/tests.GroupCreationTests.html">GroupCreationTests</a>.
+<a href="classes/tests.GroupCreationTests.html#tesGroupCreation[1](GroupData{id=0, name='test 1'})">tesGroupCreation[1](GroupData{id=0, name='test 1'})</a>
+</li>
+<li>
+<a href="classes/tests.GroupCreationTests.html">GroupCreationTests</a>.
+<a href="classes/tests.GroupCreationTests.html#tesGroupCreation[2](GroupData{id=0, name='test 2'})">tesGroupCreation[2](GroupData{id=0, name='test 2'})</a>
+</li>
+<li>
+<a href="classes/tests.GroupCreationTests.html">GroupCreationTests</a>.
+<a href="classes/tests.GroupCreationTests.html#tesGroupCreation[3](GroupData{id=0, name='test 3'})">tesGroupCreation[3](GroupData{id=0, name='test 3'})</a>
+</li>
+<li>
+<a href="classes/tests.GroupCreationTests.html">GroupCreationTests</a>.
+<a href="classes/tests.GroupCreationTests.html#tesGroupCreation[4](GroupData{id=0, name='test 4'})">tesGroupCreation[4](GroupData{id=0, name='test 4'})</a>
+</li>
+</ul>
+</div>
+<div id="tab1" class="tab">
+<h2>Ignored tests</h2>
+<ul class="linkList">
+<li>
+<a href="classes/tests.GroupDeletionTests.html">GroupDeletionTests</a>.
+<a href="classes/tests.GroupDeletionTests.html#testGroupDeletion">testGroupDeletion</a>
+</li>
+<li>
+<a href="classes/tests.GroupModificationTests.html">GroupModificationTests</a>.
+<a href="classes/tests.GroupModificationTests.html#testGroupModification">testGroupModification</a>
+</li>
+<li>
+<a href="classes/tests.UserCreationTests.html">UserCreationTests</a>.
+<a href="classes/tests.UserCreationTests.html#testAddNewUser">testAddNewUser</a>
+</li>
+<li>
+<a href="classes/tests.UserDeletionTests.html">UserDeletionTests</a>.
+<a href="classes/tests.UserDeletionTests.html#testGroupModification">testGroupModification</a>
+</li>
+<li>
+<a href="classes/tests.UserModificationTests.html">UserModificationTests</a>.
+<a href="classes/tests.UserModificationTests.html#testGroupModification">testGroupModification</a>
+</li>
+</ul>
+</div>
+<div id="tab2" class="tab">
+<h2>Packages</h2>
+<table>
+<thead>
+<tr>
+<th>Package</th>
+<th>Tests</th>
+<th>Failures</th>
+<th>Ignored</th>
+<th>Duration</th>
+<th>Success rate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="success">
+<a href="packages/default-package.html">default-package</a>
+</td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>0.010s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="failures">
+<a href="packages/tests.html">tests</a>
+</td>
+<td>11</td>
+<td>6</td>
+<td>5</td>
+<td>6.816s</td>
+<td class="failures">0%</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="tab3" class="tab">
 <h2>Classes</h2>
 <table>
 <thead>
@@ -74,7 +174,71 @@
 <th>Success rate</th>
 </tr>
 </thead>
-<tbody/>
+<tbody>
+<tr>
+<td class="success"/>
+<a href="classes/DistanceTests.html">DistanceTests</a>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>0.010s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="failures"/>
+<a href="classes/tests.GroupCreationTests.html">tests.GroupCreationTests</a>
+<td>6</td>
+<td>6</td>
+<td>0</td>
+<td>6.816s</td>
+<td class="failures">0%</td>
+</tr>
+<tr>
+<td class="skipped"/>
+<a href="classes/tests.GroupDeletionTests.html">tests.GroupDeletionTests</a>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0s</td>
+<td class="skipped">-</td>
+</tr>
+<tr>
+<td class="skipped"/>
+<a href="classes/tests.GroupModificationTests.html">tests.GroupModificationTests</a>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0s</td>
+<td class="skipped">-</td>
+</tr>
+<tr>
+<td class="skipped"/>
+<a href="classes/tests.UserCreationTests.html">tests.UserCreationTests</a>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0s</td>
+<td class="skipped">-</td>
+</tr>
+<tr>
+<td class="skipped"/>
+<a href="classes/tests.UserDeletionTests.html">tests.UserDeletionTests</a>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0s</td>
+<td class="skipped">-</td>
+</tr>
+<tr>
+<td class="skipped"/>
+<a href="classes/tests.UserModificationTests.html">tests.UserModificationTests</a>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0s</td>
+<td class="skipped">-</td>
+</tr>
+</tbody>
 </table>
 </div>
 </div>
@@ -85,7 +249,7 @@
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 4.0</a> at Jul 5, 2017 12:18:49 PM</p>
+<a href="http://www.gradle.org">Gradle 4.0</a> at Sep 19, 2017 12:12:42 PM</p>
 </div>
 </div>
 </body>

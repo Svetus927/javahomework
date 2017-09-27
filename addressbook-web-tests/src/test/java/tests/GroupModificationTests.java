@@ -10,8 +10,6 @@ import model.GroupData;
 
 import java.util.HashSet;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-
 /**
  * Created by Svetlana Verkholantceva on 13/07/2017.
  */
@@ -19,7 +17,7 @@ public class GroupModificationTests  extends TestBase{
     @BeforeMethod
     public void ensurePreconditions() {
         app.gotoGroupPage();
-        if (!app.groupHelper().isThereAGroup()) {
+        if  (! app.groupHelper().isThereAGroup()) {
             app.groupHelper().create(new GroupData().withName("Friends").withFooter("friends"));
             app.gotoGroupPage();
         }
@@ -31,9 +29,9 @@ public class GroupModificationTests  extends TestBase{
         HashSet<GroupData> before = app.groupHelper().all();
 
         GroupData groupToModify = before.iterator().next(); // выбирается случайный эл т множества и затем у него next
-        GroupData newGroupData = new GroupData().withId(groupToModify.getGroupId()).withName("Friends1").withFooter("friendsUpd");
+        GroupData newGroupData = new GroupData().withId(groupToModify.id()).withName("Friends1").withFooter("friendsUpd");
 
-        app.groupHelper().selectGroupbyId(groupToModify.getGroupId());
+        app.groupHelper().selectGroupbyId(groupToModify.id());
         app.groupHelper().edit();
         app.groupHelper().fillGroupData(newGroupData);
         app.groupHelper().submitModification();

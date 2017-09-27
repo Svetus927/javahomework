@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="DistanceTests" tests="2" skipped="0" failures="0" errors="0" timestamp="2017-09-19T10:12:19" hostname="uasso-PC" time="0.01">
+  <properties/>
+  <testcase name="Test1" classname="DistanceTests" time="0.01"/>
+  <testcase name="Test2" classname="DistanceTests" time="0.0"/>
+  <system-out><![CDATA[p1.x = 1.0 p1.y = 1.0
+distance from method is 5.0
+p1.x = 1.0 p1.y = 1.5
+distance is 7.638062581571324
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

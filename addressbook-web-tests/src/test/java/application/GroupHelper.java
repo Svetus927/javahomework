@@ -16,6 +16,8 @@ import java.util.List;
  * Created by uasso on 10/07/2017.
  */
 public class GroupHelper extends HelperBase {
+    private Groups groupCache = null; // для ускорения работы
+
 
     public GroupHelper(WebDriver wd) {
         super(wd);
@@ -51,7 +53,7 @@ public class GroupHelper extends HelperBase {
     }
 
     public void delete(GroupData groupToDelete) {
-        selectGroupbyId(groupToDelete.getGroupId());
+        selectGroupbyId(groupToDelete.id());
         deleteSelectedGroup();
 
     }
@@ -92,10 +94,10 @@ public class GroupHelper extends HelperBase {
         return groups;
     }
 
-    private Groups groupCache = null; // для ускорения работы
+
 
     public HashSet<GroupData> all() {
-
+// метод аналогичный методу GetList но результат  не List  а множество
         HashSet groups = new HashSet<GroupData>();
 
         List<WebElement> elements = wd.findElements(By.cssSelector("input[name='selected[]'"));

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="tests.GroupDeletionTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2017-09-19T10:29:21" hostname="uasso-PC" time="3.008">
+  <properties/>
+  <testcase name="testGroupDeletion" classname="tests.GroupDeletionTests" time="3.008"/>
+  <system-out><![CDATA[before = 31
+after = 30
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
