@@ -4,10 +4,9 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import org.hibernate.annotations.Type;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @XStreamAlias("group")  // м. использоватьля для определения названий тегов при создании тестовых данных в формате xml
 @Entity // для маппинга объектов  при соединении с БД через Hibernate ( тест HBConnectionTests )
@@ -43,6 +42,9 @@ public class GroupData {
     public String header() {
         return header;
     }
+
+    @ManyToMany (mappedBy = "groups") // это означает что в парном классе UserData надо найти поле groups и взять связки оттуда
+    private Set<GroupData> groups = new HashSet<>(); // set т к контакт может  входить в неск разных групп
 
 
     public GroupData withId(int id) {

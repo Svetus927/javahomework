@@ -1,14 +1,13 @@
 package tests;
 
 
+import model.Groups;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import model.GroupData;
-
-import java.util.HashSet;
 
 /**
  * Created by Svetlana Verkholantceva on 13/07/2017.
@@ -17,7 +16,8 @@ public class GroupModificationTests  extends TestBase{
     @BeforeMethod
     public void ensurePreconditions() {
         app.gotoGroupPage();
-        if  (! app.groupHelper().isThereAGroup()) {
+        if (app.db().groups().size()==0)//  if  (! app.groupHelper().isThereAGroup())
+        {
             app.groupHelper().create(new GroupData().withName("Friends").withFooter("friends"));
             app.gotoGroupPage();
         }
@@ -26,7 +26,7 @@ public class GroupModificationTests  extends TestBase{
     @Test
     public void testGroupModification() {
 
-        HashSet<GroupData> before = app.groupHelper().all();
+        Groups before = app.db().groups();
 
         GroupData groupToModify = before.iterator().next(); // выбирается случайный эл т множества и затем у него next
         GroupData newGroupData = new GroupData().withId(groupToModify.id()).withName("Friends1").withFooter("friendsUpd");
@@ -37,7 +37,7 @@ public class GroupModificationTests  extends TestBase{
         app.groupHelper().submitModification();
 
         app.gotoGroupPage();
-        HashSet<GroupData> after = app.groupHelper().all();
+        Groups after = app.db().groups();//groupHelper().all();
 
         // Сравниваем размеры списков:
         Assert.assertEquals(after.size(), before.size() );
@@ -48,7 +48,10 @@ public class GroupModificationTests  extends TestBase{
         MatcherAssert.assertThat(after, CoreMatchers.equalTo(before));
        // Assert.assertEquals(before,after);   простой testng-шный способ без хамкреста для примера
 
+        verifyGroupsUI();
 
     }
+
+
 
 }

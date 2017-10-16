@@ -111,7 +111,7 @@ public class GroupHelper extends HelperBase {
     }
 
     public Groups allGroups() {
-// метод аналогичный all но возвращающий объект типа Groups еоторый мы создали сами для добавления собственных методов
+// метод аналогичный all но возвращающий объект типа Groups еоторый мы создали сами для добавления собственных методов (для красоты)
         if (groupCache != null) {
             return new Groups(groupCache);
         }

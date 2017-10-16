@@ -35,17 +35,10 @@ public class ApplicationManager {
 
     }
 
-    public static boolean isAlertPresent(FirefoxDriver wd) {
-        try {
-            wd.switchTo().alert();
-            return true;
-        } catch (NoAlertPresentException e) {
-            return false;
-        }
-    }
+
 
     public void init() throws IOException {
-        String target = System.getProperty("target");//"local2"); // 1-ый параметр название св-ва,
+        String target = System.getProperty("target","local2"); // 1-ый параметр название св-ва,
         // которое может быть задано в ком строке, и может юыть не определено системой, как в данном случае и вернуло бы без деф
         // значения null;  2-ой пар-р - значение по умолчанию, если  при вызове пар-р не указан
         String propertiesFileName = String.format("src/test/resources/%s.properties", target);
@@ -55,6 +48,8 @@ public class ApplicationManager {
 // ** Инициализируем соединение с БД: **
         dbHelper = new DbHelper();
 
+        // **   значение св во browser  передается из TestBase а  туда из build.gradle из ком строки или берется деф если
+        //      в ком строке не задано или вообще запуск из среды
         if (browser.equals(BrowserType.FIREFOX)) {
             wd = new FirefoxDriver();
         }
@@ -102,5 +97,12 @@ public class ApplicationManager {
         navigationHelper.gotoGroupPage();
     }
 
-
+    public static boolean isAlertPresent(FirefoxDriver wd) {
+        try {
+            wd.switchTo().alert();
+            return true;
+        } catch (NoAlertPresentException e) {
+            return false;
+        }
+    }
 }
