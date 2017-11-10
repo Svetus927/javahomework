@@ -11,10 +11,12 @@ import java.io.File;
  * Created by uasso on 11/07/2017.
  */
 public class HelperBase {
-    public WebDriver wd;
+    protected WebDriver wd;
+    protected final ApplicationManager app;
 
-    public HelperBase(WebDriver wd) {
-        this.wd= wd;
+    public HelperBase( ApplicationManager app) {
+        this.app = app;
+        this.wd= app.getDriver();
     }
 
     protected void type(By locator, String text) {
@@ -39,10 +41,10 @@ public class HelperBase {
         }
 
     }
+
     protected void click(By locator) {
         wd.findElement(locator).click();
     }
-
 
     protected boolean isElementPresent(By locator) {
         try {
@@ -52,5 +54,6 @@ public class HelperBase {
             return false;
         }
     }
+
 
 }

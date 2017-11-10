@@ -15,7 +15,7 @@ import java.util.List;
  * Created by uasso on 10/07/2017.
  */
 public class UserHelper extends HelperBase {
-  //  private WebDriver wd;
+
 
     public UserHelper(WebDriver wd) {
         super(wd);

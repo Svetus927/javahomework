@@ -18,12 +18,11 @@ public class NavigationHelper extends HelperBase {
     public void gotoUserPage() {
 
         wd.get(webBaseUrl);
-   //     wd.get("http://localhost/addressbookv4.1.4/");
     }
 
     public void gotoGroupPage() {
 
-      //  wd.get("http://localhost/addressbookv4.1.4/group.php/");
+
         wd.get(webBaseUrl +"group.php/");
     }
 }

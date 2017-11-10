@@ -35,6 +35,7 @@ public class TestBase {
         app.stop();
     }
 
+
     public void verifyGroupsUI() {
         // функция проверяющая что группы в интерфейсе соответсвуют группам в БД
         Groups dbGroups =app.db().groups();

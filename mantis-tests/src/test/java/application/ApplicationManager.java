@@ -29,8 +29,10 @@ public class ApplicationManager {
     private WebDriver wd; // сделан private для того чтобы вме классы могли получить к нему доступ только через метод getDriver()
                         // при инициализации app не означивается чтоб не тормозить работу ( дальше  исп ленивая иниц-ия (getDriver
 
+    private FtpHelper ftp;
+    private MailHelper mailHelper;
     private  NavigationHelper navigationHelper;
-
+    private  ManageUserHelper manageUserHelper;
 
 
  //   private DbHelper dbHelper;  пока что не  создан  - пока коментим
@@ -66,20 +68,7 @@ public class ApplicationManager {
 
 
 
-    public NavigationHelper getNavigationHelper() {
-        return navigationHelper;
-    }
 
-
-
-
-    public void gotoUserPage() {
-        navigationHelper.gotoUserPage();
-    }
-
-    public void gotoGroupPage() {
-        navigationHelper.gotoGroupPage();
-    }
 
     public static boolean isAlertPresent(FirefoxDriver wd) {
         try {
@@ -99,13 +88,15 @@ public class ApplicationManager {
         return properties.getProperty(key);
     }
 
-    public RegistrationHelper registration() {
+    public RegistrationHelper registrationHelper() {
         return new RegistrationHelper(this);
     }
 
+    // ** ЛЕНИВАЯ ИНИЦИАЛИЗАЦИЯ  вебдрайвера** //
     public WebDriver getDriver() {
         if (wd == null) {
             // **  Выбираем броузер в котором будем проводить тестирование на основании параметра browser
+             // пар р browser считывается/задается при инициализации app.init
             if (browser.equals(BrowserType.FIREFOX)) {
                 wd = new FirefoxDriver();
             } else if (browser.equals(BrowserType.IE)) {
@@ -115,12 +106,41 @@ public class ApplicationManager {
             }
 
         }
-        System.out.println(wd.getTitle());
+
     //    wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-
-        //navigationHelper = new NavigationHelper(wd, properties.getProperty("web.BaseUrl"));
-
         return wd;
+    }
+
+    // ** ЛЕНИВАЯ ИНИЦИАЛИЗАЦИЯ  передатчика файлов** //
+    public FtpHelper ftp(){
+        if (ftp == null) {
+            ftp = new FtpHelper(this);
+        }
+        return ftp;
+    }
+
+    // ** ЛЕНИВАЯ ИНИЦИАЛИЗАЦИЯ почтового помощника** //
+    public MailHelper MailHelper(){
+        if (mailHelper == null) {
+            mailHelper = new MailHelper(this);
+        }
+        return mailHelper;
+    }
+
+    // ** ЛЕНИВАЯ ИНИЦИАЛИЗАЦИЯ  навигатора** //
+    public NavigationHelper navigationHelper(){
+        if (navigationHelper == null) {
+            navigationHelper = new NavigationHelper(this,this.getProperty("web.BaseUrl"));
+        }
+        return navigationHelper;
+    }
+
+    // ** ЛЕНИВАЯ ИНИЦИАЛИЗАЦИЯ  помощника по управдлению пользователями** //
+    public ManageUserHelper manageUserHelper() {
+        if (manageUserHelper== null) {
+            manageUserHelper = new ManageUserHelper(this);
+        }
+        return manageUserHelper;
     }
 }
 
