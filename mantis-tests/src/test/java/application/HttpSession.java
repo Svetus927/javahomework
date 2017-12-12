@@ -63,6 +63,8 @@ public class HttpSession {
         CloseableHttpResponse response = httpClient.execute(get);
         String body = getTextFromResponse(response);
         return body.contains(String.format("<span class=\"user-info\">%s</span>", username));
+
+
     }
 
 }

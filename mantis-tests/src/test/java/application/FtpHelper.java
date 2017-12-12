@@ -21,7 +21,7 @@ public class FtpHelper {
     }
 
 
-    // ** Использоуется при инициализации в testbase
+    // ** Использоуется при инициализации в testbase для подмены файла с каптчей на без.
     public void upload (File file, String target, String backup) throws IOException {
         ftp.connect(app.getProperty("ftp.host"));
         ftp.login(app.getProperty("ftp.username"), app.getProperty("ftp.password"));

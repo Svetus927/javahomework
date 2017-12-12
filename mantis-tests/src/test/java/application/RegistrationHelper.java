@@ -36,5 +36,12 @@ public class RegistrationHelper extends HelperBase {
 
     }
 
+    public void setupPassword(String link, String password) {
+        wd.get(link);
+        type(By.name("password"),password);
+        type(By.name("password_confirm"), password );
+        click(new By.ByCssSelector("button[type='submit']"));
+
+    }
 
 }

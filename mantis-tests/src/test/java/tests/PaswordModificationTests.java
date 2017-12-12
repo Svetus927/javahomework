@@ -1,5 +1,6 @@
 package tests;
 
+import application.DbJdbcHelper;
 import application.HttpSession;
 import model.MailMessage;
 import model.MantisUserData;
@@ -34,38 +35,50 @@ import static tests.TestBase.app;
  */
 public class PaswordModificationTests extends TestBase{
 
-    @BeforeClass
-    //** сначала заходим под админом
-    public void loginAsAdministrator() throws IOException {
+    String username ="svakok11";//+System.currentTimeMillis();
+    String useremail = "svakok@localhost.localdomain";
+    int createdUserId;
+            
+    @BeforeMethod
+    public void loginAsAdminCreateUser() throws IOException, MessagingException {
+       DbJdbcHelper db = new DbJdbcHelper();
+
+        app.MailHelper().start();
+        createdUserId = db.createUserWithoutUIandGetId(username, useremail );
+
+   //    String link = app.MailHelper().findConfirmationLinkByEmail(useremail);   похоже не просит подтверждение писбма  потому что создание не через UI ,
+        // когда просит подтверждение пароля
+    //    app.registrationHelper().setupPassword(link,  "kvakva");
 
         Boolean loggedAsAdmin = app.navigationHelper().loginAsAdmininUI(app.getProperty("web.AdminLogin"), app.getProperty("web.AdminPassword"));
-
         System.out.println("loggedAsAdmin "+ loggedAsAdmin);
         Assert.assertTrue(loggedAsAdmin, "Залогиниться под админом не удалось!");
 
+
     }
 
-    @BeforeMethod
+
+
+     //@BeforeMethod
     public void startMailServer() {
         app.MailHelper().start();
     }
 
- @Test
+
+    @Test
     public void testChangePasswordSuccess() throws IOException, MessagingException {
         app.navigationHelper().gotoManageUsersPage();
-        String partUsername= "user15099780";
-        MantisUserData user = app.manageUserHelper().findUserToManage(partUsername);
-        String email =  user.email;
-        String realname = user.realname;
+
+        MantisUserData user = app.manageUserHelper().findUserToManage(createdUserId);
+
         String newPassword =  "hahaha1234";
+
         app.manageUserHelper().startResetPassword();
 
      // После того как начался старт регистрации нового пользователя, ему на почту должно прийти подтверждение,
      //сод ссылку, по кот нужно перейти и подтвердить рег-ию
-     // Должно прийти 2 письма (одно этому юзеру, а второе админу) и ждем мы их 10000 милисекунд:
-     List<MailMessage> messages =  app.MailHelper().waitForMail(1,10000);
-     String link = app.MailHelper().findConfirmationLinkByEmail(messages, email);
-     app.manageUserHelper().finishResetPassword(link, realname, newPassword);
+     String link = app.MailHelper().findConfirmationLinkByEmail( user.email);
+     app.manageUserHelper().finishResetPassword(link, user.realname, newPassword);
 
 
      userLoginCheckWithoutUI(user.username, newPassword);
@@ -77,7 +90,7 @@ public class PaswordModificationTests extends TestBase{
         HttpSession session = app.newSession();
 
         boolean login = session.login(username, password);
-        System.out.println("login is "+ login);
+
         Assert.assertTrue(session.isLoggedInAs(username), "строка поиска не найдена");
     }
 

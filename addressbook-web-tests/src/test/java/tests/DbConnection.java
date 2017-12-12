@@ -1,7 +1,7 @@
 package tests;
 
 /**
- * Created by uasso on 21/09/2017. Проба создания
+ * Create on 21/09/2017. Проба создания подключения к БД через JDBC
  */
 import model.GroupData;
 import model.Groups;
@@ -21,6 +21,7 @@ public class DbConnection {
             conn = DriverManager.getConnection("jdbc:mysql://localhost/addressbook?user=root&password=");
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery("select group_id, group_name from group_list");
+      //      ResultSet rsNew = st.execute("INSERT INTO group_list VALUES (12336, NULL, 'SelfNEW', 'Chelseyheader', 'Clelsey')" );
             Groups groups = new Groups();
             while (rs.next() ) {
                 groups.add(new GroupData().withId(rs.getInt("group_id")).withName(rs.getString("group_name")));

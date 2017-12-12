@@ -33,9 +33,10 @@ public class ApplicationManager {
     private MailHelper mailHelper;
     private  NavigationHelper navigationHelper;
     private  ManageUserHelper manageUserHelper;
+    private SoapHelper soapHelper;
 
 
- //   private DbHelper dbHelper;  пока что не  создан  - пока коментим
+    //   private DbHelper dbHelper;  пока что не  создан  - пока коментим
 
 
     public ApplicationManager(String browser) {
@@ -141,6 +142,14 @@ public class ApplicationManager {
             manageUserHelper = new ManageUserHelper(this);
         }
         return manageUserHelper;
+    }
+
+    // ** ЛЕНИВАЯ ИНИЦИАЛИЗАЦИЯ  помощника по SOAP для исп без интерфейса mantis** //
+    public SoapHelper soapHelper() {
+        if (soapHelper== null) {
+            soapHelper = new SoapHelper(this);
+        }
+        return soapHelper;
     }
 }
 

@@ -1,0 +1,12 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<!-- suite в файле м.б. только один  -->
+<suite name="Suite1" verbose="1" >
+    <test name="loginTests" >
+        <classes>
+            <class name="tests.RestTests"/>
+            <class name="tests.SkipIfNotFixedTests"/>
+
+        </classes>
+    </test>
+
+</suite>

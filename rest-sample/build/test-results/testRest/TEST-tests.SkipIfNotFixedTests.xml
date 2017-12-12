@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="tests.SkipIfNotFixedTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2017-12-12T13:09:09" hostname="uasso-PC" time="0.414">
+  <properties/>
+  <testcase name="testCheckIfFixed" classname="tests.SkipIfNotFixedTests" time="0.414"/>
+  <system-out><![CDATA[runing test, the bug 43 should be fixed !!
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

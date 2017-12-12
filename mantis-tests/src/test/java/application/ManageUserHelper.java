@@ -16,18 +16,23 @@ public class ManageUserHelper extends HelperBase {
         super(app);
     }
 
-    public MantisUserData findUserToManage (String partUserName) {
-        WebElement tr = wd.findElement(By.xpath("//tr[.//td[contains(.,'user15099780')]]"));
+    public MantisUserData findUserToManage (int id) {
+        WebElement tr = wd.findElement(By.cssSelector(String.format("a[href*='user_id=%s']", id)));   //wd.findElement(By.xpath(String.format("//tr[.//td[contains(.,'%s')]]",userName)));
         if (tr!=null) {
+            tr.click();
             MantisUserData user = new MantisUserData();
-            user.setUsername(tr.findElements(By.cssSelector("td")).get(0).getText());
-            user.setRealname(tr.findElements(By.cssSelector("td")).get(1).getText());
-            user.setEmail(tr.findElements(By.cssSelector("td")).get(2).getText());
+            //user.setId(id);
+            user.setUsername(wd.findElement(By.cssSelector("input[name='username']")).getAttribute("value"));
+            user.setRealname(wd.findElement(By.cssSelector("input[name='realname']")).getAttribute("value"));
+            user.setEmail(wd.findElement(By.cssSelector("input[name='email']")).getAttribute("value"));
 
-            tr.findElement(By.cssSelector("a[href*='manage_user_edit'")).click();
+       //     user.setUsername(tr.findElements(By.cssSelector("td")).get(0).getText());
+     //       user.setRealname(tr.findElements(By.cssSelector("td")).get(1).getText());
+    //        user.setEmail(tr.findElements(By.cssSelector("td")).get(2).getText());
+       //     tr.findElement(By.cssSelector("a[href*='manage_user_edit'")).click();
 
             System.out.println("hurray we opened page  to edit user");
-            //  Assert.assertFalse("email для юзера не найден! ", email.isEmpty());
+
             return user;
         } else
             return null;

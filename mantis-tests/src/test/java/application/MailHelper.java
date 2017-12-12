@@ -72,7 +72,10 @@ public class MailHelper {
     }
 
 
-    public String findConfirmationLinkByEmail(List<MailMessage> messages, String email) {
+    public String findConfirmationLinkByEmail( String email) throws IOException, MessagingException {
+
+        // Должно прийти 2 письма (одно этому юзеру, а второе админу) и ждем мы их 10000 милисекунд:
+        List<MailMessage> messages =  app.MailHelper().waitForMail(1,100000);
         // ** Находим сообщение адресованное нужному имэйлу
         MailMessage mailMessage=  messages.stream().filter((m) -> m.to.equals(email)).findAny().get();
 

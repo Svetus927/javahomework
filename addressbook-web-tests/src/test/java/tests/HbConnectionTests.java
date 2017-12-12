@@ -40,6 +40,7 @@ protected void setUp() throws Exception {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         List<GroupData> result = session.createQuery( "from GroupData" ).list();
+
         for ( GroupData group : result ) {
             System.out.println( "Group (" + group.id() + ") : " + group.name() );
         }

@@ -14,7 +14,7 @@ import java.util.List;
 
 /**
  * Created by uasso on 16/10/2017. по уроку 8.4
- * task 17 18
+ * регистрация нового пользователя, с предварительным запуском постового сервера. Подмена конфиг файла происходит в Testbase
  */
 public class RegistrationTests extends TestBase {
 
@@ -25,18 +25,16 @@ public class RegistrationTests extends TestBase {
 
     @Test
     public void testRegistration() throws IOException, MessagingException {
-        String user = "user"+  System.currentTimeMillis();;
+        String user = "userN"+  System.currentTimeMillis();;
         String realname = "Automated testuser";
         String email = user+"@localhost.localdomain";
         String password = user+"_pwd";
 
         app.registrationHelper().startRegistration(user, email);
+
         // После того как начался старт регистрации нового пользователя, ему на почту должно прийти подтверждение,
         //сод ссылку, по кот нужно перейти и подтвердить рег-ию
-        // Должно прийти 2 письма (одно этому юзеру, а второе админу) и ждем мы их 10000 милисекунд:
-        List<MailMessage> messages =  app.MailHelper().waitForMail(2,10000);
-
-        String link = app.MailHelper().findConfirmationLinkByEmail(messages, email);
+        String link = app.MailHelper().findConfirmationLinkByEmail(email);
 
         app.registrationHelper().finishRegistration(link, realname, password);
 
