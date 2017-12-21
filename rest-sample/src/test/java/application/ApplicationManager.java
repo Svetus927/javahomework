@@ -59,6 +59,7 @@ public class ApplicationManager {
         if (restHelper== null) {
             restHelper = new RestHelper(this);
         }
+
         return restHelper;
     }
 }

@@ -27,12 +27,12 @@ import java.util.Set;
 public class RestTests extends TestBase{
 
     @Test
-    public void testCreateIssue() throws IOException {
+    public void testCreateIssue() throws IOException, InterruptedException {
 
         Set<Issue> oldset = app.restHelper().getIssues();
         Issue newIssue = new Issue().withSubject("new s").withDescription("My description new");
         int issueId =  app.restHelper().createIssue(newIssue);
-
+       // app.restHelper().wait(1000);
         Set<Issue> newset =  app.restHelper().getIssues();
         oldset.add( newIssue.withId(issueId));
         Assert.assertEquals(oldset, newset);

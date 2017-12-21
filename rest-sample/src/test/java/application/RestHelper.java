@@ -76,10 +76,11 @@ public class RestHelper {
         int id  = parsed.getAsJsonObject().get("issue_id").getAsInt();
         return id;
     }
+
     public Set<Issue> getIssues() throws IOException {
         Executor executor = getExecutor();
 
-        String json = executor.execute(Request.Get(app.getProperty("web.BaseUrl")+"/issues.json"))
+        String json = executor.execute(Request.Get(app.getProperty("web.BaseUrl")+"/issues.json?limit=500"))
                 .returnContent().asString();
 
 
@@ -97,7 +98,6 @@ public class RestHelper {
         String json =RestAssured.get(app.getProperty("web.BaseUrl")+"/issues.json").asString();
 
 
-
         // парсим полученный json:
         JsonElement parsed = new JsonParser().parse(json);
         // выделяем элементы с ключем issues
@@ -110,6 +110,7 @@ public class RestHelper {
         // Executor из бибки http fluent
         return Executor.newInstance()
                 .auth(app.getProperty("web.ApiKei")   , "");
+
     }
 
     public void initRestAssured() {
