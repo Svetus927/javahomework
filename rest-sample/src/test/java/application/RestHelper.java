@@ -5,7 +5,9 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
+import com.jayway.restassured.RestAssured;
 import model.Issue;
+
 import org.apache.http.client.fluent.Executor;
 import org.apache.http.client.fluent.Request;
 import org.apache.http.message.BasicNameValuePair;
@@ -58,11 +60,29 @@ public class RestHelper {
         return id;
     }
 
+    public int createIssueWithRestAssured(Issue newIssue) throws IOException {
+       /* Executor executor = getExecutor();
+        String json = executor.execute(Request.Post(app.getProperty("web.BaseUrl")+"/issues.json").
+                bodyForm(new BasicNameValuePair("subject", newIssue.getSubject()),
+                        new BasicNameValuePair("description", newIssue.getDescription())))
+                .returnContent().asString();  -  версия без restassured*/
+        String json = RestAssured.given()
+                .parameter("subject", newIssue.getSubject())
+                .parameter("description", newIssue.getDescription())
+                .post(app.getProperty("web.BaseUrl")+"/issues.json").asString();
+        // парсим полученный json:
+        JsonElement parsed = new JsonParser().parse(json);
+        // выделяем элемент с ключем issue_id
+        int id  = parsed.getAsJsonObject().get("issue_id").getAsInt();
+        return id;
+    }
     public Set<Issue> getIssues() throws IOException {
         Executor executor = getExecutor();
 
         String json = executor.execute(Request.Get(app.getProperty("web.BaseUrl")+"/issues.json"))
                 .returnContent().asString();
+
+
         // парсим полученный json:
         JsonElement parsed = new JsonParser().parse(json);
         // выделяем элементы с ключем issues
@@ -70,12 +90,29 @@ public class RestHelper {
 
         return new Gson().fromJson(issues, new TypeToken<Set<Issue>>(){}.getType()); //  преобразуем в set<Issue>
 
-
     }
 
+    public Set<Issue> getIssueswithREstAssured() throws IOException {
+        // без executor который в бибке http клиента
+        String json =RestAssured.get(app.getProperty("web.BaseUrl")+"/issues.json").asString();
+
+
+
+        // парсим полученный json:
+        JsonElement parsed = new JsonParser().parse(json);
+        // выделяем элементы с ключем issues
+        JsonElement issues = parsed.getAsJsonObject().get("issues");
+
+        return new Gson().fromJson(issues, new TypeToken<Set<Issue>>(){}.getType()); //  преобразуем в set<Issue>
+
+    }
     private Executor getExecutor() {
+        // Executor из бибки http fluent
         return Executor.newInstance()
                 .auth(app.getProperty("web.ApiKei")   , "");
     }
 
+    public void initRestAssured() {
+        RestAssured.authentication = RestAssured.basic(app.getProperty("web.ApiKei")   , "");
+    }
 }
