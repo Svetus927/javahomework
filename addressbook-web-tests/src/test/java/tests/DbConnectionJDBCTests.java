@@ -1,7 +1,7 @@
 package tests;
 
 /**
- * Create on 21/09/2017. Проба создания подключения к БД через JDBC
+ * Create on 21/09/2017. Проба создания подключения к БД через JDBC, по уроку 7.1
  */
 import model.GroupData;
 import model.Groups;
@@ -10,10 +10,11 @@ import  org.testng.annotations.Test;
 import java.sql.*;
 
 
-public class DbConnection {
+public class DbConnectionJDBCTests {
+    
 // Пример подключения к БД через JDBC
     @Test
- public void DbConnectionTest() {
+ public void testDbConnection() {
 
         Connection conn = null;
         try {

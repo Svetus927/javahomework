@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="tests.GroupModificationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2017-09-21T10:55:06" hostname="uasso-PC" time="10.192">
+<testsuite name="tests.GroupModificationTests" tests="1" skipped="1" failures="0" errors="0" timestamp="2017-12-22T12:59:53" hostname="uasso-PC" time="0.013">
   <properties/>
-  <testcase name="testGroupModification" classname="tests.GroupModificationTests" time="10.192"/>
+  <testcase name="testGroupModification" classname="tests.GroupModificationTests" time="0.013">
+    <skipped/>
+  </testcase>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
