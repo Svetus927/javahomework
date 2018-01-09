@@ -80,7 +80,7 @@ public class RestHelper {
     public Set<Issue> getIssues() throws IOException {
         Executor executor = getExecutor();
 
-        String json = executor.execute(Request.Get(app.getProperty("web.BaseUrl")+"/issues.json?limit=500"))
+        String json = executor.execute(Request.Get(app.getProperty("web.BaseUrl")+"/issues.json?limit=600"))
                 .returnContent().asString();
 
 
