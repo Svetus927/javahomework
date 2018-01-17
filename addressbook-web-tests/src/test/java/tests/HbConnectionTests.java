@@ -1,6 +1,7 @@
 package tests;
 
 import model.GroupData;
+import model.UserData;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
@@ -43,6 +44,19 @@ protected void setUp() throws Exception {
 
         for ( GroupData group : result ) {
             System.out.println( "Group (" + group.id() + ") : " + group.name() );
+        }
+        session.getTransaction().commit();
+        session.close();
+    }
+
+    @Test
+    public  void HbConnectionTestContacts() {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        List<UserData> result = session.createQuery( "from UserData where deprecated = '0000-00-00'" ).list();
+
+        for ( UserData user : result ) {
+            System.out.println( "User (" + user.getId() + ") : " + user.getFirstname() );
         }
         session.getTransaction().commit();
         session.close();

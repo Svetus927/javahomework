@@ -13,7 +13,7 @@ import java.util.List;
 
 /**
  * Created by uasso on 26/09/2017.
- * помощник работы с БД
+ * помощник работы с БД через Hibernate
  */
 public class DbHelper {
     private   final SessionFactory sessionFactory;
@@ -36,6 +36,7 @@ public class DbHelper {
         session.close();
         return new Groups(result);
     }
+
     public List<UserData> users()  {
         Session session = sessionFactory.openSession();
         session.beginTransaction();

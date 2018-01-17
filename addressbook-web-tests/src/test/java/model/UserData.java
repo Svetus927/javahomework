@@ -4,6 +4,7 @@ import org.hibernate.annotations.Type;
 
 
 import javax.persistence.*;
+import java.io.File;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -39,14 +40,20 @@ public class UserData {
     @Type(type = "text")
     String workphone;
 
+    @Column(name = "email")
+    @Type(type = "text")
     String email;
 
     @Transient // для пропуска привязки-маппинга к столбу т.к. такого столбца нет
-            String allphones; // для проверки модификации контакта (  склеивание для проверки телефона)
+     String allphones; // для проверки модификации контакта (  склеивание для проверки телефона)
 
-    @Column(name = "photo")
-    @Type(type = "text")
+
+
+ //   @Column(name = "photo")
+  //  @Type(type = "text")
+    @Transient
     String photo;
+
 
     @ManyToMany
     @JoinTable(name="address_in_groups", joinColumns= @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name="group_id"))
@@ -102,6 +109,12 @@ public class UserData {
         return this;
     }
 
+
+
+    public UserData withPhoto(File photo) {
+        this.photo = photo.getPath();
+        return this;
+    }
     public int getId() {
         return id;
     }
@@ -130,5 +143,8 @@ public class UserData {
         return new Groups(groups);
     }
 
+    public File getPhoto() {
+        return new File(photo);
+    }
 
 }

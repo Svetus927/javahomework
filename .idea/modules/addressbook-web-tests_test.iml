@@ -16,7 +16,7 @@
     <orderEntry type="library" name="Gradle: com.beust:jcommander:1.72" level="project" />
     <orderEntry type="library" name="Gradle: com.thoughtworks.xstream:xstream:1.4.8" level="project" />
     <orderEntry type="library" name="Gradle: mysql:mysql-connector-java:5.1.44" level="project" />
-    <orderEntry type="library" name="Gradle: org.hibernate:hibernate-core:5.2.11.Final" level="project" />
+    <orderEntry type="library" name="Gradle: org.hibernate:hibernate-core:5.2.12.Final" level="project" />
     <orderEntry type="library" name="Gradle: junit:junit:4.12" level="project" />
     <orderEntry type="library" name="Gradle: org.yaml:snakeyaml:1.17" level="project" />
     <orderEntry type="library" name="Gradle: org.seleniumhq.selenium:selenium-chrome-driver:3.4.0" level="project" />

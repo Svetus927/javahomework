@@ -29,6 +29,12 @@ public class GroupData {
     @Type(type="text")
     private  String footer;
 
+
+
+    @ManyToMany (mappedBy = "groups") // это означает что в парном классе UserData надо найти поле groups и взять связки оттуда
+     private Set<UserData> users = new HashSet<>(); // set т к контакт может  входить в неск разных групп
+
+    //* Геттеры и сеттеры   *//
     public int id() {return id;}
 
     public String name() {
@@ -42,9 +48,6 @@ public class GroupData {
     public String header() {
         return header;
     }
-
-    @ManyToMany (mappedBy = "groups") // это означает что в парном классе UserData надо найти поле groups и взять связки оттуда
-    private Set<GroupData> groups = new HashSet<>(); // set т к контакт может  входить в неск разных групп
 
 
     public GroupData withId(int id) {
@@ -67,6 +70,9 @@ public class GroupData {
         return this;
     }
 
+    public Set<UserData> getUsers() {
+        return users;
+    }
 
     @Override
     public boolean equals(Object o) {

@@ -34,8 +34,9 @@
         <!-- Drop and re-create the database schema on startup -->
         <property name="hbm2ddl.auto">validate</property>
 
-        <!-- Names the annotated entity class -->
+        <!-- All Names the annotated entity class -->
         <mapping class="model.GroupData"/>
+        <mapping class="model.UserData"/>
 
     </session-factory>
 
