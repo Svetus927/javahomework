@@ -1,0 +1,37 @@
+<list>
+  <mantisUser>
+    <id>0</id>
+    <username>testuser0</username>
+    <realname>testuser0 realname</realname>
+    <email>testuser0@localhost.localdomain</email>
+    <password>testuser0_pwd</password>
+  </mantisUser>
+  <mantisUser>
+    <id>0</id>
+    <username>testuser10</username>
+    <realname>testuser10 realname</realname>
+    <email>testuser10@localhost.localdomain</email>
+    <password>testuser10_pwd</password>
+  </mantisUser>
+  <mantisUser>
+    <id>0</id>
+    <username>testuser20</username>
+    <realname>testuser20 realname</realname>
+    <email>testuser20@localhost.localdomain</email>
+    <password>testuser20_pwd</password>
+  </mantisUser>
+  <mantisUser>
+    <id>0</id>
+    <username>testuser30</username>
+    <realname>testuser30 realname</realname>
+    <email>testuser30@localhost.localdomain</email>
+    <password>testuser30_pwd</password>
+  </mantisUser>
+  <mantisUser>
+    <id>0</id>
+    <username>testuser40</username>
+    <realname>testuser40 realname</realname>
+    <email>testuser40@localhost.localdomain</email>
+    <password>testuser40_pwd</password>
+  </mantisUser>
+</list>

@@ -2,6 +2,7 @@ package application;
 
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -49,8 +50,8 @@ public class ApplicationManager {
         System.out.println("properties filename is  " + propertiesFileName);
 
         properties.load( new FileReader(new File(propertiesFileName)));
-// ** Инициализируем соединение с БД: **
-        dbHelper = new DbHelper();
+        // ** Инициализируем соединение с БД: **
+       dbHelper = new DbHelper();
 
         if ("".equals(properties.getProperty("selenium.Server"))) /*  */{
             // **   значение св во browser  передается из TestBase а  туда из build.gradle из ком строки или берется деф если
@@ -65,6 +66,7 @@ public class ApplicationManager {
         }  else {
             DesiredCapabilities capabilities= new DesiredCapabilities();
             capabilities.setBrowserName(browser);
+            capabilities.setPlatform(Platform.fromString(System.getProperty("platform", "win10")));
             wd = new RemoteWebDriver(new URL(properties.getProperty("selenium.Server")),capabilities);
         }
 

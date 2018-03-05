@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="tests.UserCreationTests" tests="1" skipped="1" failures="0" errors="0" timestamp="2017-09-19T10:12:42" hostname="uasso-PC" time="0.0">
-  <properties/>
-  <testcase name="testAddNewUser" classname="tests.UserCreationTests" time="0.0">
-    <skipped/>
-  </testcase>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

@@ -18,7 +18,7 @@ public class GroupModificationTests  extends TestBase{
         app.gotoGroupPage();
         if (app.db().groups().size()==0)//  if  (! app.groupHelper().isThereAGroup())
         {
-            app.groupHelper().create(new GroupData().withName("Friends").withFooter("friends"));
+            app.groupHelper().create(new GroupData().withName("FriendsHoy").withFooter("friendsHoy"));
             app.gotoGroupPage();
         }
     }
@@ -26,10 +26,12 @@ public class GroupModificationTests  extends TestBase{
     @Test
     public void testGroupModification() {
 
-        Groups before = app.db().groups();
+        Groups before = app.db().groups();//  для убыстрения работы неосновные операции, такие получение списка групп
+                // делаем без UI, обращаясь напрямую в БД через БД помощника. Аналогично надо переделать для добавления и удаления.
+                // Тестируемую ф-ию - модификацию делаем ессно через UI
 
         GroupData groupToModify = before.iterator().next(); // выбирается случайный эл т множества и затем у него next
-        GroupData newGroupData = new GroupData().withId(groupToModify.id()).withName("Friends1").withFooter("friendsUpd");
+        GroupData newGroupData = new GroupData().withId(groupToModify.id()).withName("FriendsHoy").withFooter("friendsUpd");
 
         app.groupHelper().selectGroupbyId(groupToModify.id());
         app.groupHelper().edit();

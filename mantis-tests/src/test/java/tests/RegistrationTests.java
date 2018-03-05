@@ -1,20 +1,26 @@
 package tests;
 
 import application.HttpSession;
-import model.MailMessage;
+
+import dataproviders.MantisUserdataProvider;
+import model.MantisUserData;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import ru.lanwen.verbalregex.VerbalExpression; // используется биб ка verbalregex для поиска линки подтверждения3
+import ru.lanwen.verbalregex.VerbalExpression; // исп-ся биб ка verbalregex для поиска текста-линки подтверждения
 
 import javax.mail.MessagingException;
 import java.io.IOException;
-import java.util.List;
+
+
 
 /**
- * Created by uasso on 16/10/2017. по уроку 8.4
- * регистрация нового пользователя, с предварительным запуском постового сервера. Подмена конфиг файла происходит в Testbase
+ * Created on 16/10/2017. по уроку 8.4
+ * регистрация нового пользователя, с предварительным запуском почтового сервера, встроенного непосредственно в тесты,
+ * для этого исп бибка subethamail
+ * Подмена конфиг файла происходит в Testbase для отключения капчи при регистрации нового пользователя
+ * Проверка успешного логина под вновь созданным польз-лем происходит без GUI с помощбю HTTP сессии
  */
 public class RegistrationTests extends TestBase {
 
@@ -23,12 +29,12 @@ public class RegistrationTests extends TestBase {
         app.MailHelper().start();
     }
 
-    @Test
-    public void testRegistration() throws IOException, MessagingException {
-        String user = "userN"+  System.currentTimeMillis();;
-        String realname = "Automated testuser";
-        String email = user+"@localhost.localdomain";
-        String password = user+"_pwd";
+    @Test  (dataProviderClass = MantisUserdataProvider.class, dataProvider ="validUsersCSV")
+    public void testRegistration(MantisUserData mu) throws IOException, MessagingException {
+        String user = mu.username; // "userNN"+  System.currentTimeMillis();;
+        String realname = mu.realname; //"Automated testuser";
+        String email = mu.email; // user+"@localhost.localdomain";
+        String password = mu.password; // user+"_pwd";
 
         app.registrationHelper().startRegistration(user, email);
 
@@ -48,23 +54,12 @@ public class RegistrationTests extends TestBase {
         HttpSession session = app.newSession();
 
         boolean login = session.login(username, password);
-        System.out.println("login is "+ login);
+        System.out.println("function of login is performed = "+ login);
         Assert.assertTrue(session.isLoggedInAs(username), "строка поиска не найдена");
     }
 
-   /*  вынесено в  класс MailHelper для  использования в др тестах
-   private String findConfirmationLinkByEmail(List<MailMessage> messages, String email) {
-        // ** Находим сообщение адресованное нужному имэйлу
-       MailMessage mailMessage=  messages.stream().filter((m) -> m.to.equals(email)).findAny().get();
 
-       // для поиска линки подтв-ия в письме используется биб ка verbalregex. Она упрощает построение регулярных выражений
-        VerbalExpression regex = VerbalExpression.regex().find("http://").nonSpace().oneOrMore().build();
-
-        return regex.getText(mailMessage.text);// regex.getText возвращает найденный кусок регулярного выражения в тексте писбма
-    }  */
-
-
-    @AfterMethod(alwaysRun = true)
+    @AfterMethod(alwaysRun = true) //чтобы останавливался в случае если тесты не отработали успешно и тп
     public void stopMailServer() {
         app.MailHelper().stop();
     }

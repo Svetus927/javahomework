@@ -1,5 +1,5 @@
 package generators;
-// в Edit Configuration . Program arguments пишем -f src/test/resources/groups.csv -c 5 -d xml
+
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.ParameterException;
@@ -13,11 +13,14 @@ import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 
+// в Edit Configuration  Program arguments пишем -f src/test/resources/groups.csv -c 5 -d xml
+// ( порядок параметров не важен главное чтоб было перед значением название опции
+
 /**
  *  30/07/2017. Класс генерирующий тестовые данные для групп ( GroupData)
  */
 public class GroupDataGenerator {
-// здесь испоьзуется библиотека jCommander для анализа параметров из ком строки. Документация на jcommander.org
+// здесь используется библиотека jCommander для анализа параметров из ком строки. Документация на jcommander.org
     @Parameter(names = "-c", description = "group count")
     //        название опции,  описание
     public int count;
@@ -30,7 +33,8 @@ public class GroupDataGenerator {
 
 // раз это запускаемый класс то дб функция main
     public static void  main(String[] args) throws IOException {
-        // здесь мы используем возможность запуска с параметрами из коммандной строки и укажем там сколько и таргетфайл
+        // здесь мы используем возможность запуска с параметрами из коммандной строки и укажем там
+        // сколько и таргетфайл
 
         GroupDataGenerator generator = new GroupDataGenerator();
         JCommander jCommander = new JCommander(generator);
@@ -40,13 +44,14 @@ public class GroupDataGenerator {
             ex.usage(); // в случае оишбки выводится  текст о досутпных опциях с помощбю метода usage
             return;
         }
-        generator.run();
 
 
+        generator.run(); // запкск собственно генератора
     }
 
     private void run() throws IOException {
         List<GroupData> groups = generateGroups(count);
+
         if (format.equals("csv") ) {
             saveAsCsv(groups, new File(file));
         }
@@ -75,7 +80,8 @@ public class GroupDataGenerator {
 
     private static void saveAsCsv(List<GroupData> groups, File file) throws IOException {
 
-        System.out.println(new File(".").getAbsolutePath()); // на всякий случай узнаем текущую директорию для этой проги
+        // ** на всякий случай узнаем текущую директорию для этой проги  //
+        System.out.println(new File(".").getAbsolutePath());
         Writer writer = new FileWriter(file);
         for (GroupData group: groups ) {
             writer.write(String.format("%s;%s;%s\n", group.name(),group.header(), group.footer()));
@@ -87,8 +93,9 @@ public class GroupDataGenerator {
     private static List<GroupData> generateGroups(int count) {
         List<GroupData> groups = new ArrayList<GroupData>();
         for (int i =0; i< count; i++) {
-            groups.add(new GroupData().withName(String.format("test %s", i))
-                    .withHeader(String.format("header %s", i)).withFooter(String.format("footer %s", i)));
+            groups.add(new GroupData().withName(String.format("test %s", System.currentTimeMillis()))
+                    .withHeader(String.format("header %s", i))
+                    .withFooter(String.format("footer %s", i)));
         }  //в String.format вместо % подставляется значение второго параметра)
         return groups;
     }

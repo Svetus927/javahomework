@@ -4,26 +4,22 @@ import com.thoughtworks.xstream.XStream;
 import model.GroupData;
 
 import model.Groups;
+import dataproviders.GroupdataProvider;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.testng.Assert;
-import org.testng.annotations.DataProvider;
+
 import org.testng.annotations.Test;
 
-import java.io.*;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
+
 
 
 public class GroupCreationTests extends TestBase {
 
-    @DataProvider// пример считывания данных из CSV файла
+    /* @DataProvider// пример считывания данных из CSV файла -  ВЫНЕСЕНО В ОТДЕЛЬНЫЙ КЛАСС
     public Iterator<Object[]> validGroups() throws IOException {
         List<Object[]> list = new ArrayList<>();
-        BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/groups.csv")));
+        BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/newgroups.csv")));
         String line = reader.readLine();
         while (line != null) {
             String[] split = line.split(";");
@@ -31,10 +27,10 @@ public class GroupCreationTests extends TestBase {
             line = reader.readLine();
         }
         return list.iterator();
-    }
+    }  */
 
-    @DataProvider // пример считывания данных из XML файла
-    public Iterator<Object[]> validGroupsXML() throws IOException {
+    /* @DataProvider // пример считывания данных из XML файла
+   public Iterator<Object[]> validGroupsXML() throws IOException {
         List<Object[]> list = new ArrayList<>();
         BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/groups.xml")));
         String xml = "";
@@ -47,9 +43,9 @@ public class GroupCreationTests extends TestBase {
         xstream.processAnnotations(GroupData.class);
         List<GroupData>  groups = (List<GroupData>)xstream.fromXML(xml); // приведение типов ( кастинг одного типа данных к другому)
         return groups.stream().map((g)->new Object[]{g}).collect(Collectors.toList()).iterator();
-    }
+    }  */  // выносим в отдельный класс провайдеров
 
-    @Test(dataProvider = "validGroups")
+    @Test(dataProviderClass = GroupdataProvider.class, dataProvider ="validGroupsCSV")
     public void tesGroupCreation(GroupData group) {
         //  GroupData group = new GroupData().withName("FriendsCheck").withFooter("friends");
 

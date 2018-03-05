@@ -18,7 +18,9 @@ import java.util.List;
 
 /**
  * Created on 10/10/2017. текст взят из видео 8.3
- * класс создан для прямого взаимодействия с сервером по ротоколу HTTP без участия браузера
+ * класс создан для прямого взаимодействия с сервером по протоколу HTTP без участия браузера
+ * а точнее  для быстрых проверок без участия интерфейса, например  в случае что возможно залогиниться на сервер под
+ * юзером созданным автоматически
  */
 public class HttpSession {
 
@@ -28,11 +30,13 @@ public class HttpSession {
     // * конструктор * //
     public  HttpSession (ApplicationManager app)  {
         this.app =  app;
+        // для того чтобы  редирект выполнялся в созданном клиенте автоматически (код 302) устанавливаем стратегию в LAX
         httpClient = HttpClients.custom().setRedirectStrategy(new LaxRedirectStrategy()).build();
     }
 
    public boolean login (String username, String password) throws IOException {
-
+      // ** пример  поста с параметрами, они к посту прикручиваются методом setEntity, а уж потом у инициализированного
+       // заранее http клиента выполняется execute этого поста
        HttpPost post = new HttpPost(app.getProperty("web.BaseUrl")+"/login.php");
        List<NameValuePair> params = new ArrayList<>();
        params.add(new BasicNameValuePair ("username", username));

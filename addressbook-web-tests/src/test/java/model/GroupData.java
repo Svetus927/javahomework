@@ -8,14 +8,16 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-@XStreamAlias("group")  // м. использоватьля для определения названий тегов при создании тестовых данных в формате xml
+@XStreamAlias("gruppa")  // м. использоватьcя для определения названий тегов при создании тестовых данных в формате xml
+                        // удобно когда нужно какие то поля пропустить ( не сериализовывать и какието тэги переназвать,
+                       // но можно и без этих аннотоций, а просто все указать в самом коде-генераторе (GroupDataGenerator)
 @Entity // для маппинга объектов  при соединении с БД через Hibernate ( тест HBConnectionTests )
 @Table(name="group_list") // для Hibernate  привязка к нужной таблице, если бы имя класса и таблицы были одикановы, то не нужно
 public class GroupData {
 
     @Id // для указания что это уник идр в базе
     @Column(name="group_id") // @Column для привязки к столбцу в БД ( hibernate)
-    @XStreamOmitField // для того чтобы это поле не сохранялось в формате xml, т.к. это всегда макс инт
+    @XStreamOmitField // чтобы это поле не сохранялось в формате XML, т.к. это всегда макс инт (исп для генератора xml ф)
     private  int id = Integer.MAX_VALUE;
 
     @Column(name="group_name") // @Column для привязки к столбцу в БД ( hibernate)

@@ -5,4 +5,5 @@
 
 Для указания параметров исп поле Switches в параметрах конфигурации, например:
  -Pbrowser=chrome  (аналогично тому как запусается из консоли)
+ -Pbrowser=firefox -Ptarget=remote -Pplatform=linux
 

@@ -1,9 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="tests.GroupModificationTests" tests="1" skipped="1" failures="0" errors="0" timestamp="2017-12-22T12:59:53" hostname="uasso-PC" time="0.013">
+<testsuite name="tests.GroupModificationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2018-01-17T13:28:18" hostname="uasso-PC" time="6.798">
   <properties/>
-  <testcase name="testGroupModification" classname="tests.GroupModificationTests" time="0.013">
-    <skipped/>
-  </testcase>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
+  <testcase name="testGroupModification" classname="tests.GroupModificationTests" time="6.798"/>
+  <system-out><![CDATA[Hibernate: select groupdata0_.group_id as group_id1_2_, groupdata0_.group_footer as group_fo2_2_, groupdata0_.group_header as group_he3_2_, groupdata0_.group_name as group_na4_2_ from group_list groupdata0_
+Hibernate: select groupdata0_.group_id as group_id1_2_, groupdata0_.group_footer as group_fo2_2_, groupdata0_.group_header as group_he3_2_, groupdata0_.group_name as group_na4_2_ from group_list groupdata0_
+Hibernate: select groupdata0_.group_id as group_id1_2_, groupdata0_.group_footer as group_fo2_2_, groupdata0_.group_header as group_he3_2_, groupdata0_.group_name as group_na4_2_ from group_list groupdata0_
+]]></system-out>
+  <system-err><![CDATA[1516195699078	Marionette	DEBUG	Canceled page load listener because no navigation has been detected
+1516195699338	Marionette	DEBUG	Received DOM event "beforeunload" for "http://localhost/addressbookv4.1.4/group.php/"
+1516195699471	Marionette	DEBUG	Received DOM event "pagehide" for "http://localhost/addressbookv4.1.4/group.php/"
+1516195699471	Marionette	DEBUG	Received DOM event "unload" for "http://localhost/addressbookv4.1.4/group.php/"
+1516195699513	Marionette	DEBUG	Received DOM event "DOMContentLoaded" for "http://localhost/addressbookv4.1.4/group.php/"
+1516195699848	Marionette	DEBUG	Received DOM event "pageshow" for "http://localhost/addressbookv4.1.4/group.php/"
+1516195700224	Marionette	DEBUG	Canceled page load listener because no navigation has been detected
+1516195701573	Marionette	DEBUG	Canceled page load listener because no navigation has been detected
+1516195702719	Marionette	DEBUG	Received DOM event "beforeunload" for "http://localhost/addressbookv4.1.4/group.php/"
+1516195703067	Marionette	DEBUG	Received DOM event "pagehide" for "http://localhost/addressbookv4.1.4/group.php/"
+1516195703107	Marionette	DEBUG	Received DOM event "unload" for "http://localhost/addressbookv4.1.4/group.php/"
+1516195703190	Marionette	DEBUG	Received DOM event "DOMContentLoaded" for "http://localhost/addressbookv4.1.4/group.php/"
+1516195703243	Marionette	DEBUG	Received DOM event "pageshow" for "http://localhost/addressbookv4.1.4/group.php/"
+1516195703256	Marionette	DEBUG	Received DOM event "beforeunload" for "http://localhost/addressbookv4.1.4/group.php/"
+1516195703303	Marionette	DEBUG	Received DOM event "pagehide" for "http://localhost/addressbookv4.1.4/group.php/"
+1516195703304	Marionette	DEBUG	Received DOM event "unload" for "http://localhost/addressbookv4.1.4/group.php/"
+1516195703327	Marionette	DEBUG	Received DOM event "DOMContentLoaded" for "http://localhost/addressbookv4.1.4/group.php/"
+1516195703419	Marionette	DEBUG	Received DOM event "pageshow" for "http://localhost/addressbookv4.1.4/group.php/"
+]]></system-err>
 </testsuite>

@@ -7,7 +7,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 /**
- * Created by uasso on 16/10/2017. по уроку 8.5 передача файлов
+ * Created on 16/10/2017. по уроку 8.5 передача файлов
  * для работы треб подключить зависимость compile 'commons-net:commons-net:x.xx '
  */
 public class FtpHelper {
@@ -24,7 +24,8 @@ public class FtpHelper {
     // ** Использоуется при инициализации в testbase для подмены файла с каптчей на без.
     public void upload (File file, String target, String backup) throws IOException {
         ftp.connect(app.getProperty("ftp.host"));
-        ftp.login(app.getProperty("ftp.username"), app.getProperty("ftp.password"));
+        ftp.login(app.getProperty("ftp.username"), app.getProperty("ftp.password"));  // значения берутся из файла св-в,
+        // указанного при инициализации, по умолчанию local.properties
         ftp.deleteFile(backup); // на всякий случай удаляем предыдущий backup
         ftp.rename(target, backup);  // переименовываем текущий файл в backup
         ftp.enterLocalPassiveMode(); // специфика исп в данном случае сервера, так надо :)

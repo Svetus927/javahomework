@@ -22,9 +22,9 @@ public class ManageUserHelper extends HelperBase {
             tr.click();
             MantisUserData user = new MantisUserData();
             //user.setId(id);
-            user.setUsername(wd.findElement(By.cssSelector("input[name='username']")).getAttribute("value"));
-            user.setRealname(wd.findElement(By.cssSelector("input[name='realname']")).getAttribute("value"));
-            user.setEmail(wd.findElement(By.cssSelector("input[name='email']")).getAttribute("value"));
+            user.withUsername(wd.findElement(By.cssSelector("input[name='username']")).getAttribute("value"))
+                .withRealname(wd.findElement(By.cssSelector("input[name='realname']")).getAttribute("value"))
+                    .withEmail(wd.findElement(By.cssSelector("input[name='email']")).getAttribute("value"));
 
        //     user.setUsername(tr.findElements(By.cssSelector("td")).get(0).getText());
      //       user.setRealname(tr.findElements(By.cssSelector("td")).get(1).getText());
